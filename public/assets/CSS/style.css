@@ -1,0 +1,190 @@
+/* ===============================
+   BASE RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("../images/bg.jpg") no-repeat center center/cover;
+  animation: fadeInBody 0.8s ease-in-out;
+}
+
+/* ===============================
+   WRAPPER CONTAINER
+================================ */
+.wrapper {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 1s ease;
+}
+
+/* ===============================
+   INPUT FIELDS
+================================ */
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: white;
+  padding: 20px 45px 20px 20px;
+  transition: all 0.3s ease;
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translateY(-30%);
+  font-size: 20px;
+}
+
+/* Focus / Hover Animation */
+.input-box input:hover {
+  border-color: #66d9ef;
+  transform: scale(1.03);
+}
+
+.input-box input:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 12px rgba(0, 188, 212, 0.6);
+  transform: scale(1.05);
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.btn {
+  width: 100%;
+  height: 45px;
+  background: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #00bcd4, #4caf50);
+  color: white;
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* ===============================
+   REGISTER / FORGOT LINKS
+================================ */
+.register-link,
+.remember-forgot {
+  text-align: center;
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.register-link a,
+.remember-forgot a {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover,
+.remember-forgot a:hover {
+  color: #4caf50;
+  text-decoration: underline;
+}
+
+/* ===============================
+   PAGE FADE-IN ANIMATION
+================================ */
+body {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInPage 0.8s ease-out forwards;
+}
+
+/* Dashboard content animation */
+.main-content {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* Sidebar slide-in animation */
+.sidebar {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideInSidebar 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Keyframes */
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInSidebar {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
