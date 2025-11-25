@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
-| AUTHENTICATION ROUTES
+| LOGIN AUTHENTICATION ROUTES
 |--------------------------------------------------------------------------
 */
 Route::get('/', fn() => redirect('/login'));
@@ -35,7 +35,7 @@ Route::get('/patient/messages', fn() => view('patient.messages'));
 | ADMIN ROUTES
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // 🏠 Admin Dashboard
     Route::get('/dashboard', fn() => view('dashboards.admin_panel'))->name('admin.dashboard');
@@ -43,9 +43,10 @@ Route::prefix('admin')->group(function () {
     // 👥 Manage Users (Grouped by Role)
     Route::prefix('manage-users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.manage-users');
-        Route::post('/store', [UserController::class, 'store'])->name('admin.users.store');
-        Route::put('/{id}', [UserController::class, 'update'])->name('admin.users.update');
-        Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+        Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');    //Add Patient form
+        Route::post('/store', [UserController::class, 'store'])->name('admin.users.store');      //Save new patient
+        Route::put('/{id}', [UserController::class, 'update'])->name('admin.users.update');      //Update patient
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy'); //Delete patient
 
         // Filtered Views by Role
         Route::get('/patients', [UserController::class, 'patients'])->name('admin.users.patients');

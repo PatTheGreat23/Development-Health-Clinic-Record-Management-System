@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patients | Admin Panel</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    /* ===========================
-       GLOBAL STYLES
-    ============================ */
     body {
       font-family: "Poppins", sans-serif;
       background: #f4f6f9;
@@ -17,9 +15,6 @@
       min-height: 100vh;
     }
 
-    /* ===========================
-       SIDEBAR
-    ============================ */
     .sidebar {
       width: 250px;
       background: #2c3e50;
@@ -65,9 +60,6 @@
       transform: translateX(5px);
     }
 
-    /* ===========================
-       MAIN CONTENT
-    ============================ */
     .main-content {
       flex: 1;
       margin-left: 270px;
@@ -89,9 +81,6 @@
       font-size: 15px;
     }
 
-    /* ===========================
-       SEARCH BAR
-    ============================ */
     .search-bar {
       margin: 30px 0;
       display: flex;
@@ -113,9 +102,6 @@
       box-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
     }
 
-    /* ===========================
-       CARDS LAYOUT
-    ============================ */
     .cards-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -127,14 +113,14 @@
       background: #fff;
       border-radius: 16px;
       padding: 25px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
       text-align: center;
       transition: all 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0,188,212,0.25);
+      box-shadow: 0 8px 20px rgba(0, 188, 212, 0.25);
     }
 
     .card i {
@@ -155,12 +141,15 @@
       margin: 6px 0;
     }
 
-    /* ===========================
-       RESPONSIVE
-    ============================ */
     @media (max-width: 900px) {
-      .sidebar { width: 200px; }
-      .main-content { margin-left: 220px; padding: 40px; }
+      .sidebar {
+        width: 200px;
+      }
+
+      .main-content {
+        margin-left: 220px;
+        padding: 40px;
+      }
     }
 
     @media (max-width: 700px) {
@@ -169,9 +158,19 @@
         left: -250px;
         transition: left 0.3s;
       }
-      .sidebar.active { left: 0; }
-      .main-content { margin-left: 0; padding: 25px; }
-      .search-bar input { width: 100%; }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 25px;
+      }
+
+      .search-bar input {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -189,9 +188,17 @@
   </aside>
 
   <main class="main-content">
-    <header>
-      <h1>Patients</h1>
-      <p>View and manage all registered patients in the system.</p>
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h1>Patients</h1>
+        <p>View and manage all registered patients in the system.</p>
+      </div>
+      <div>
+        <a href="{{ route('admin.users.create', ['role' => 'Patient']) }}"
+          style="background: #00bcd4; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 500;">
+          <i class='bx bx-user-plus'></i> Add Patient
+        </a>
+      </div>
     </header>
 
     <div class="search-bar">
@@ -213,7 +220,7 @@
   <script>
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.card');
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
       const term = this.value.toLowerCase();
       cards.forEach(card => {
         const name = card.querySelector('h3').textContent.toLowerCase();
@@ -222,4 +229,5 @@
     });
   </script>
 </body>
+
 </html>

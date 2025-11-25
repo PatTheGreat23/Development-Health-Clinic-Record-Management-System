@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // Show Add Account form
+    public function create(Request $request)
+    {
+        $defaultRole = $request->role ?? null;
+        return view('accounts.add_account', compact('defaultRole'));
+    }
+
     // Display all users
     public function index()
     {
@@ -35,7 +42,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return back()->with('success', 'User added successfully!');
+        return redirect()->route('admin.manage-users')->with('success', 'User created successfully!');
     }
 
     // Update user
@@ -60,19 +67,24 @@ class UserController extends Controller
         return back()->with('success', 'User deleted successfully!');
     }
 
-    public function patients() {
+    // View patients
+    public function patients()
+    {
         $patients = User::where('role', 'Patient')->get();
         return view('admin.users.patients', compact('patients'));
     }
 
-    public function doctors() {
+    // View doctors
+    public function doctors()
+    {
         $doctors = User::where('role', 'Doctor')->get();
         return view('admin.users.doctors', compact('doctors'));
     }
 
-    public function nurses() {
+    // View nurses
+    public function nurses()
+    {
         $nurses = User::where('role', 'Nurse')->get();
         return view('admin.users.nurses', compact('nurses'));
     }
-
 }

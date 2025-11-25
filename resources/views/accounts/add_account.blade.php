@@ -1,61 +1,42 @@
-<?php
-include 'db_connect.php';
+@extends('layouts.app')
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+@section('content')
+  <div class="container">
+    <h2>Add New Patient</h2>
 
-    // Secure password hashing
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    @if(session('success'))
+      <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-    $sql = "INSERT INTO users (fullname, email, username, password, role) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $fullname, $email, $username, $hashedPassword, $role);
+    @if($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
-    if ($stmt->execute()) {
-        echo "<script>alert('User added successfully!'); window.location='manage_users.php';</script>";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+    <form method="POST" action="{{ route('admin.users.store') }}">
+      @csrf
+      
+      <label>Full Name:</label><br>
+      <input type="text" name="fullname" required><br><br>
 
-    $stmt->close();
-    $conn->close();
-}
-?>
+      <label>Email:</label><br>
+      <input type="email" name="email" required><br><br>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add User</title>
-</head>
-<body>
-  <h2>Add New User</h2>
-  <form method="POST">
-    <label>Full Name:</label><br>
-    <input type="text" name="fullname" required><br><br>
+      <label>Username:</label><br>
+      <input type="text" name="username" required><br><br>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+      <label>Password:</label><br>
+      <input type="password" name="password" required><br><br>
 
-    <label>Username:</label><br>
-    <input type="text" name="username" required><br><br>
+      <input type="hidden" name="role" value="Patient">
 
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+      <button type="submit">Add Patient</button>
+    </form>
 
-    <label>Role:</label><br>
-    <select name="role" required>
-      <option value="Admin">Admin</option>
-      <option value="Staff">Staff</option>
-      <option value="Patient">Patient</option>
-    </select><br><br>
-
-    <button type="submit">Add User</button>
-  </form>
-</body>
-</html>
+  </div>
+@endsection
